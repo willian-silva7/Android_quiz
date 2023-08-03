@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Android_quiz</string>
+    <string name="text_view">Android_quiz</string>
+    <string name="button">Android_quiz</string>
+    <string name="edit_text">Android_quiz</string>
+    <string name="example">example</string>
+    <string name="questions">Questions:</string>
+    <string name="put_your_username">Put your Username!!!</string>
+    <string name="name">Name...</string>
+    <string name="iniciar">Iniciar</string>
+    <string name="texto">Texto</string>
+</resources>
