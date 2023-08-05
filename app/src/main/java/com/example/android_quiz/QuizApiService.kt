@@ -7,9 +7,11 @@ import retrofit2.http.*
 
 interface QuizApiService {
     @GET("question")
-    fun getRandomQuestions(): Call<Questions>
+    fun getRandomQuestions(): Call<QuestionClass>
 
     @POST("answer")
-    fun verifyAnswerQuestion(@Query("questionId") questionId: String, @Body answer: JSONObject): Call<Result>
+    fun verifyAnswerQuestion(@Query("questionId") questionId: String, @Body answer: JSONObject): Call<ResultClass>
+
+
 
 }

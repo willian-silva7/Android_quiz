@@ -1,5 +1,5 @@
 package com.example.android_quiz
 
-data class Result(
+data class ResultClass(
     val result: Boolean
 )

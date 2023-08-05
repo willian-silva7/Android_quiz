@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/willo/Documents/Android_quiz/app/src/main/res/layout/activity_main.xml" value="0.1265625" />
+        <entry key="..\:/Users/willo/Documents/Android_quiz/app/src/main/res/layout/answer_activity.xml" value="0.1265625" />
+        <entry key="..\:/Users/willo/Documents/Android_quiz/app/src/main/res/layout/final_activity.xml" value="0.1265625" />
         <entry key="..\:/Users/willo/Documents/Android_quiz/app/src/main/res/layout/item_layout.xml" value="0.2210144927536232" />
         <entry key="..\:/Users/willo/Documents/Android_quiz/app/src/main/res/layout/question_activity.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/willo/Documents/Android_quiz/app/src/main/res/layout/recicler_view.xml" value="0.1265625" />

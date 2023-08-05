@@ -1,6 +1,6 @@
 package com.example.android_quiz
 
-import android.content.SharedPreferences
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android_quiz.databinding.QuestionActivityBinding
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,8 +31,8 @@ class QuestionActivity: AppCompatActivity() {
         val quizApiService = retrofit.create(QuizApiService::class.java)
 
         val call = quizApiService.getRandomQuestions()
-        call.enqueue(object: Callback<Questions> {
-            override fun onResponse(call: Call<Questions>, response: Response<Questions>) {
+        call.enqueue(object: Callback<QuestionClass> {
+            override fun onResponse(call: Call<QuestionClass>, response: Response<QuestionClass>) {
                 if (response.isSuccessful) {
                     val question = response.body() // Questão aleatória obtida da API em formato JSON
                     // Agora você pode trabalhar com a pergunta recebida
@@ -48,7 +47,7 @@ class QuestionActivity: AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<Questions>, t: Throwable) {
+            override fun onFailure(call: Call<QuestionClass>, t: Throwable) {
                 Log.i(TAG, "onFailure: ${t.message}")
             }
 
@@ -70,6 +69,13 @@ class QuestionActivity: AppCompatActivity() {
         recyclerView.adapter = adapter
     }
 
+/*    override fun onResume() {
+        super.onResume()
+        val name: String =recoverUsername()
+
+        Toast.makeText(this, name, Toast.LENGTH_SHORT).show()
+    }*/
+
     private fun showQuestion(question: List<String>?) {
         // Verifica se a pergunta não é nula antes de adicionar à lista
         if (question != null) {
@@ -82,7 +88,7 @@ class QuestionActivity: AppCompatActivity() {
     }
 
 
-    private fun enviarResposta(questionId: String, userResponse: String) {
+    /*private fun enviarResposta(questionId: String, userResponse: String) {
         val jsonResponse = JSONObject()
         jsonResponse.put("answer", userResponse)
 
@@ -109,5 +115,10 @@ class QuestionActivity: AppCompatActivity() {
             }
 
         })
+    }*/
+
+    private fun recoverUsername(): String {
+        val sharedPreferences = getSharedPreferences("name", Context.MODE_PRIVATE)
+        return sharedPreferences.getString("name", "player") ?: "player"
     }
 }
