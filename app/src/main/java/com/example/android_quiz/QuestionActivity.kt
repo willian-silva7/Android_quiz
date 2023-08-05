@@ -1,5 +1,6 @@
 package com.example.android_quiz
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android_quiz.databinding.QuestionActivityBinding
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,6 +21,7 @@ class QuestionActivity: AppCompatActivity() {
 
     private var dataList = ArrayList<String>()
 
+    private val BASE_URL = "?questionId={id}"
     private val TAG: String = "CHECK_RESPONSE"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,9 +38,10 @@ class QuestionActivity: AppCompatActivity() {
                     val question = response.body() // Questão aleatória obtida da API em formato JSON
                     // Agora você pode trabalhar com a pergunta recebida
                     if (question != null) {
+                        adapter.setQuestionId(question.id)
                         showQuestion(question.options)
                     }
-                    Log.i(TAG, "onFailure: $question")
+                    Log.i(TAG, "onSuccess: $question")
 
                 } else {
                     // Tratar falha na resposta da API (código HTTP diferente de 200)
@@ -75,5 +79,35 @@ class QuestionActivity: AppCompatActivity() {
         }
         // Notifica o adapter sobre a mudança na lista
         adapter.notifyDataSetChanged()
+    }
+
+
+    private fun enviarResposta(questionId: String, userResponse: String) {
+        val jsonResponse = JSONObject()
+        jsonResponse.put("answer", userResponse)
+
+        val retrofit = RetrofitClient.getClient()
+
+        val quizApiService = retrofit.create(QuizApiService::class.java)
+
+        val call = quizApiService.verifyAnswerQuestion(questionId, jsonResponse)
+        call.enqueue(object : Callback<Result> {
+            override fun onResponse(call: Call<Result>, response: Response<Result>) {
+                if (response.isSuccessful) {
+                    val serviceResponse = response.body()
+
+                    if (serviceResponse?.result == true){
+                        Log.i(TAG, "Acertou")
+                    } else {
+                        Log.i(TAG, "Errou")
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Result>, t: Throwable) {
+                Log.i(TAG, "onFailure: ${t.message}")
+            }
+
+        })
     }
 }
