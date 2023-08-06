@@ -1,13 +1,11 @@
 package com.example.android_quiz
 
-import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONObject
 import retrofit2.Call
@@ -18,6 +16,7 @@ class QuestionAdapter(private val mListOfOptions: List<String>): RecyclerView.Ad
 
     private val TAG: String = "CHECK_RESPONSE"
     private lateinit var questionsId: String
+    private var verifyQuestion: Boolean= false
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView: TextView = itemView.findViewById(R.id.textView)
@@ -37,7 +36,6 @@ class QuestionAdapter(private val mListOfOptions: List<String>): RecyclerView.Ad
             val intent = Intent(context, AnswerActivity::class.java)
             intent.putExtra("correct_answer", correctAnswer)
             context.startActivity(intent)
-//            Log.i(TAG, "Text ${viewHolder.textView.text} Id: $questionsId")
         }
     }
 
@@ -50,15 +48,9 @@ class QuestionAdapter(private val mListOfOptions: List<String>): RecyclerView.Ad
     private fun sendAnswer(questionId: String, userResponse: String): Boolean {
         val jsonResponse = JSONObject()
         jsonResponse.put("answer", userResponse)
-        Log.i(TAG, "JSON response: $jsonResponse id: $questionId")
         val retrofit = RetrofitClient.getClient()
 
         val quizApiService = retrofit.create(QuizApiService::class.java)
-
-        /*try {
-
-        }catch (e: Exception) {}*/
-        var verifyQuestion = true
 
         val call = quizApiService.verifyAnswerQuestion(questionId, jsonResponse)
         call.enqueue(object : Callback<ResultClass> {

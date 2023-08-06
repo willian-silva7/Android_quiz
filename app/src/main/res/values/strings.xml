@@ -6,8 +6,10 @@
     <string name="example">example</string>
     <string name="questions">Questions:</string>
     <string name="put_your_username">Put your Username!!!</string>
-    <string name="name">Name...</string>
-    <string name="iniciar">Iniciar</string>
+    <string name="name">Username...</string>
+    <string name="iniciar">Start</string>
+    <string name="restart">Restart</string>
+    <string name="rename">Rename</string>
     <string name="texto">Texto</string>
     <string name="quiz"><font fgcolor='#0000FF'>SUPER QUIZ</font></string>
 </resources>

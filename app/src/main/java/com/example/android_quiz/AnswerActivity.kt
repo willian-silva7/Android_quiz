@@ -22,8 +22,10 @@ class AnswerActivity : AppCompatActivity() {
 
         if (answerCorrect) {
             answerPageBinding.txtName.text = "Correct question!!!"
+            answerPageBinding.imageView.setImageResource(R.drawable.ic_correct)
             increaseValue()
         }else {
+            answerPageBinding.imageView.setImageResource(R.drawable.ic_wrong)
             answerPageBinding.txtName.text = "Incorrect question..."
         }
 
@@ -50,6 +52,9 @@ class AnswerActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putInt("points", points)
         editor.apply()
+    }
+
+    override fun onBackPressed() {
     }
 
     override fun onResume() {

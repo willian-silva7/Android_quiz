@@ -3,6 +3,7 @@ package com.example.android_quiz
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.android_quiz.databinding.ActivityMainBinding
@@ -36,9 +37,14 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         homeBinding.btnName.setOnClickListener(){
-            saveUsername(homeBinding.edtName.text.toString())
-            val intent = Intent(this, QuestionActivity::class.java)
-            startActivity(intent)
+            if(homeBinding.edtName.text.isNotEmpty()) {
+                saveUsername(homeBinding.edtName.text.toString())
+                val intent = Intent(this, QuestionActivity::class.java)
+                startActivity(intent)
+            }else{
+                Toast.makeText(this, "Username Field is Required", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
     }

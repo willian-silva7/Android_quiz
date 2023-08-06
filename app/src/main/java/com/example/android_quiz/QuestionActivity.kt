@@ -38,6 +38,7 @@ class QuestionActivity: AppCompatActivity() {
                     // Agora você pode trabalhar com a pergunta recebida
                     if (question != null) {
                         adapter.setQuestionId(question.id)
+                        questionBinding.textView.text = question.statement
                         showQuestion(question.options)
                     }
                     Log.i(TAG, "onSuccess: $question")
@@ -59,6 +60,9 @@ class QuestionActivity: AppCompatActivity() {
 
         adapter = QuestionAdapter(dataList)
         recyclerView.adapter = adapter
+    }
+
+    override fun onBackPressed() {
     }
 
     private fun showQuestion(question: List<String>?) {
