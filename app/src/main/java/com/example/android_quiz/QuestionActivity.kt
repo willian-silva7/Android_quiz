@@ -57,24 +57,9 @@ class QuestionActivity: AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-//        for (i in 1..20) {
-//            dataList.add(ItemsViewModel(R.drawable.ic_launcher_foreground, "Item $i"))
-//        }
-
-        /*for (i in 1..20) {
-            dataList.add( "Item $i")
-        }*/
-
         adapter = QuestionAdapter(dataList)
         recyclerView.adapter = adapter
     }
-
-/*    override fun onResume() {
-        super.onResume()
-        val name: String =recoverUsername()
-
-        Toast.makeText(this, name, Toast.LENGTH_SHORT).show()
-    }*/
 
     private fun showQuestion(question: List<String>?) {
         // Verifica se a pergunta não é nula antes de adicionar à lista
@@ -85,40 +70,5 @@ class QuestionActivity: AppCompatActivity() {
         }
         // Notifica o adapter sobre a mudança na lista
         adapter.notifyDataSetChanged()
-    }
-
-
-    /*private fun enviarResposta(questionId: String, userResponse: String) {
-        val jsonResponse = JSONObject()
-        jsonResponse.put("answer", userResponse)
-
-        val retrofit = RetrofitClient.getClient()
-
-        val quizApiService = retrofit.create(QuizApiService::class.java)
-
-        val call = quizApiService.verifyAnswerQuestion(questionId, jsonResponse)
-        call.enqueue(object : Callback<Result> {
-            override fun onResponse(call: Call<Result>, response: Response<Result>) {
-                if (response.isSuccessful) {
-                    val serviceResponse = response.body()
-
-                    if (serviceResponse?.result == true){
-                        Log.i(TAG, "Acertou")
-                    } else {
-                        Log.i(TAG, "Errou")
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<Result>, t: Throwable) {
-                Log.i(TAG, "onFailure: ${t.message}")
-            }
-
-        })
-    }*/
-
-    private fun recoverUsername(): String {
-        val sharedPreferences = getSharedPreferences("name", Context.MODE_PRIVATE)
-        return sharedPreferences.getString("name", "player") ?: "player"
     }
 }

@@ -12,17 +12,13 @@ class AnswerActivity : AppCompatActivity() {
 
     private lateinit var answerPageBinding: AnswerActivityBinding
 
-    private var indicePerguntaAtual = 0
-    private var pontuacaoJogador = 0
-    private val totalPerguntas = 10
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 //        homeBinding = ActivityMainBinding.inflate(layoutInflater)
         answerPageBinding = DataBindingUtil.setContentView(this, R.layout.answer_activity)
 
-        val answerCorrect = intent.getBooleanExtra("name", false)
+        val answerCorrect = intent.getBooleanExtra("correct_answer", false)
 
         if (answerCorrect) {
             answerPageBinding.txtName.text = "Correct question!!!"

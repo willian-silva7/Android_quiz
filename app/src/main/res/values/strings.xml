@@ -9,4 +9,5 @@
     <string name="name">Name...</string>
     <string name="iniciar">Iniciar</string>
     <string name="texto">Texto</string>
+    <string name="quiz"><font fgcolor='#0000FF'>SUPER QUIZ</font></string>
 </resources>

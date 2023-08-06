@@ -17,7 +17,25 @@ class FinalActivity : AppCompatActivity() {
 
 //        homeBinding = ActivityMainBinding.inflate(layoutInflater)
         homeBinding = DataBindingUtil.setContentView(this, R.layout.final_activity)
-        homeBinding.txtName.text = recoverName()
+
+        val username = recoverName()
+        val points = recoverPoints()
+
+        when(points) {
+            0 -> {
+                homeBinding.txtName.text = "$username You didn't do well this time, try again"
+                homeBinding.rightQuestions.text = "$points correct questions"
+            }
+            10 -> {
+                homeBinding.txtName.text = "Congratulations $username, You're awesome!!!"
+                homeBinding.rightQuestions.text = "$points correct questions"
+            }
+            else -> {
+                homeBinding.txtName.text = "You did well $username"
+                homeBinding.rightQuestions.text = "$points correct questions"
+            }
+        }
+//        homeBinding.txtName.text = ""
 
         var sharedPreferences = getSharedPreferences("name", Context.MODE_PRIVATE)
         sharedPreferences.edit().clear().apply()
@@ -30,6 +48,12 @@ class FinalActivity : AppCompatActivity() {
     //        setContentView(homeBinding2!!.root)
     }
 
+    private fun recoverPoints(): Any {
+        val sharedPreferences = getSharedPreferences("points", Context.MODE_PRIVATE)
+        val points = sharedPreferences.getInt("points", 0)
+        return points
+    }
+
     override fun onResume() {
         super.onResume()
 
@@ -37,16 +61,6 @@ class FinalActivity : AppCompatActivity() {
             val intent = Intent(this, QuestionActivity::class.java)
             startActivity(intent)
         }
-
-
-
-    }
-
-    private fun saveUsername(name: String) {
-        val sharedPreferences = getSharedPreferences("name", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("name", name)
-        editor.apply()
     }
 
     private fun recoverName(): String {

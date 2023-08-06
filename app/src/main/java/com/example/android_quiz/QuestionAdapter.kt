@@ -72,14 +72,14 @@ class QuestionAdapter(private val mListOfOptions: List<String>): RecyclerView.Ad
                         verifyQuestion = true
                     } else {
                         Log.i(TAG, "Errou $serviceResponse")
-                        verifyQuestion = true
+                        verifyQuestion = false
                     }
                 }
             }
 
             override fun onFailure(call: Call<ResultClass>, t: Throwable) {
                 Log.i(TAG, "onFailure: ${t.message}")
-
+                verifyQuestion = false
             }
 
         })
