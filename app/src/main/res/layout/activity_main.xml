@@ -26,7 +26,6 @@
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
 
-
                 android:maxWidth="100dp"
                 android:maxHeight="100dp"
 
@@ -98,8 +97,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/edt_name" />
-
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
