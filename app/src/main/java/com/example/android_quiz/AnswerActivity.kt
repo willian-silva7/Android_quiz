@@ -15,7 +15,6 @@ class AnswerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        homeBinding = ActivityMainBinding.inflate(layoutInflater)
         answerPageBinding = DataBindingUtil.setContentView(this, R.layout.answer_activity)
 
         val answerCorrect = intent.getBooleanExtra("correct_answer", false)
@@ -76,10 +75,6 @@ class AnswerActivity : AppCompatActivity() {
 
     private fun loadIndex(): Int {
         val sharedPreferences = getSharedPreferences("index", Context.MODE_PRIVATE)
-        var index = sharedPreferences.getInt("index", 0)
-
-        return index
+        return sharedPreferences.getInt("index", 0)
     }
-
-
 }

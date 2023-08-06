@@ -50,8 +50,7 @@ class FinalActivity : AppCompatActivity() {
 
     private fun recoverPoints(): Any {
         val sharedPreferences = getSharedPreferences("points", Context.MODE_PRIVATE)
-        val points = sharedPreferences.getInt("points", 0)
-        return points
+        return sharedPreferences.getInt("points", 0)
     }
 
     override fun onBackPressed() {
@@ -73,7 +72,6 @@ class FinalActivity : AppCompatActivity() {
 
     private fun recoverName(): String {
         val sharedPreferences = getSharedPreferences("name", Context.MODE_PRIVATE)
-        val name = sharedPreferences.getString("name", "player") ?: "player"
-        return name
+        return sharedPreferences.getString("name", "player") ?: "player"
     }
 }

@@ -1,6 +1,5 @@
 package com.example.android_quiz
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -19,8 +18,6 @@ class QuestionActivity: AppCompatActivity() {
     private lateinit var adapter: QuestionAdapter
 
     private var dataList = ArrayList<String>()
-
-    private val BASE_URL = "?questionId={id}"
     private val TAG: String = "CHECK_RESPONSE"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +31,7 @@ class QuestionActivity: AppCompatActivity() {
         call.enqueue(object: Callback<QuestionClass> {
             override fun onResponse(call: Call<QuestionClass>, response: Response<QuestionClass>) {
                 if (response.isSuccessful) {
-                    val question = response.body() // Questão aleatória obtida da API em formato JSON
-                    // Agora você pode trabalhar com a pergunta recebida
+                    val question = response.body()
                     if (question != null) {
                         adapter.setQuestionId(question.id)
                         questionBinding.textView.text = question.statement
@@ -44,7 +40,7 @@ class QuestionActivity: AppCompatActivity() {
                     Log.i(TAG, "onSuccess: $question")
 
                 } else {
-                    // Tratar falha na resposta da API (código HTTP diferente de 200)
+                    // To treat everyone different 200 status HTTP
                 }
             }
 
@@ -66,13 +62,12 @@ class QuestionActivity: AppCompatActivity() {
     }
 
     private fun showQuestion(question: List<String>?) {
-        // Verifica se a pergunta não é nula antes de adicionar à lista
         if (question != null) {
             for(element in question) {
                 dataList.add(element)
             }
         }
-        // Notifica o adapter sobre a mudança na lista
+        // Notify adapter changes
         adapter.notifyDataSetChanged()
     }
 }

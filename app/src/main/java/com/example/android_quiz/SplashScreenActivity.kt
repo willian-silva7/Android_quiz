@@ -7,7 +7,7 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 
 class SplashScreenActivity : AppCompatActivity() {
-    // Timer da Splash Screen
+    // Timer of Splash Screen
     private val splashTimeOut: Int = 3000
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,12 +15,10 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(R.layout.splash_screen)
 
         Handler(Looper.getMainLooper()).postDelayed(
-            { // Esse método será executado sempre que o timer acabar
-                // E inicia a activity principal
+            {
+                // After the time ends, start the Main Activity
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-
-                // Fecha esta activity
                 finish()
             }, splashTimeOut.toLong()
         )

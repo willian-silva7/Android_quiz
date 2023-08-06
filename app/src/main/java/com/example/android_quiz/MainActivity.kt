@@ -15,14 +15,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        homeBinding = ActivityMainBinding.inflate(layoutInflater)
         homeBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        deleteDataquiz()
-
-    //        setContentView(homeBinding2!!.root)
+        deleteDataQuiz()
     }
 
-    private fun deleteDataquiz() {
+    private fun deleteDataQuiz() {
         var sharedPreferences = getSharedPreferences("name", Context.MODE_PRIVATE)
         sharedPreferences.edit().clear().apply()
 
@@ -36,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        homeBinding.btnName.setOnClickListener(){
+        homeBinding.btnName.setOnClickListener{
             if(homeBinding.edtName.text.isNotEmpty()) {
                 saveUsername(homeBinding.edtName.text.toString())
                 val intent = Intent(this, QuestionActivity::class.java)
@@ -44,9 +41,7 @@ class MainActivity : AppCompatActivity() {
             }else{
                 Toast.makeText(this, "Username Field is Required", Toast.LENGTH_SHORT).show()
             }
-
         }
-
     }
 
     private fun saveUsername(name: String) {
@@ -54,11 +49,5 @@ class MainActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putString("name", name)
         editor.apply()
-    }
-
-    private fun recoverName(): String {
-        val sharedPreferences = getSharedPreferences("name", Context.MODE_PRIVATE)
-        val name = sharedPreferences.getString("name", "player") ?: "player"
-        return name
     }
 }
